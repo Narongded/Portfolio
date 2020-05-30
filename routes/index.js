@@ -40,6 +40,21 @@ router.get('/login',function(req, res, next) {
   res.render('login');
 });
 router.post('/login',async function(req, res, next) {
+
+
+  
+
+  // simple validation
+  
+
+  // const passwordHash = bcrypt.hashSync(req.body.password, 10)
+  // const _user = new user({
+  //   name : req.body.name,
+  //   password: passwordHash
+  // })
+
+  // await _user.save()
+  // res.render('index')
   test = await user.findOne({name: req.body.name},(err,doc)=>{
     try {
       if(doc.name == null || doc.password == null || err != null){

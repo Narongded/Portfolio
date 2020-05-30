@@ -102,6 +102,7 @@ router.post('/add', isLoggedIn,upload.any(),async(req,res)=>{
 
   input = new data({
     name : req.body.name,
+    url : req.body.url,
     des : req.body.des,
     img : _img
   }

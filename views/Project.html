@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Portfolio</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+	<link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Mitr&display=swap" rel="stylesheet">
+
+	<style>
+	.fakeimg {
+		height: 200px;
+		background: #aaa;
+	}
+</style>
+</head>
+<body style="font-family: Mitr,sans-serif">
+
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="padding: 30px 0px 30px; background-color: #17a2b8!important">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav mx-auto" id="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">ABOUT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/project">PROJECT</a>
+            </li>
+            
+          </ul>
+        </div>  
+      </nav>
+
+	<div class="container" style="margin-top:30px;">
+		<form action="/add" method="GET" style="margin-bottom: 10px;">
+			<button type="submit" class="btn btn-danger">Add Project</button>
+
+		</form>
+		<div class="row">
+			<div class="card-deck">
+				<% data.forEach(function(data){
+					%> 
+					<div class="col-sm-4">
+						<div class="card">
+							<img class="card-img-top" src="images/<%= data.img %>" alt="Card image cap">
+							<div class="card-body">
+								<h5 class="card-title"><%= data.name %></h5>
+								
+							</div>
+							<div class="card-footer">
+								
+								<small class="text-muted"><%= data.des %></small>
+							</div>
+						</div>
+					</div>
+					
+					
+					<%
+				});  %>
+				
+				
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<style type="text/css">
+	#nav {
+		font-size: 150%;
+	}
+	/* Style all font awesome icons */
+	.fa {
+		margin: 20% 1%;
+		padding: 5% 14% 5% 6%;
+		font-size: 30px;
+		width: 40px;
+		text-align: center;
+		text-decoration: none;
+		border-radius: 50%;
+	}
+	/* Add a hover effect if you want */
+	.fa:hover {
+		opacity: 0.7;
+	}
+
+	/* Set a specific color for each brand */
+
+	/* Facebook */
+	.fa-facebook {
+		background: #3B5998;
+		color: white;
+	}
+	.fa-linkedin-square {
+		background: #3B5998;
+		color: white;
+	}
+	.fa-github {
+		background: #3B5998;
+		color: white;
+	}
+	/* Twitter */
+	.fa-twitter {
+		background: #55ACEE;
+		color: white;
+	}
+
+
+</style>
+</body>
+</html>

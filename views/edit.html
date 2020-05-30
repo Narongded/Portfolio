@@ -23,6 +23,7 @@
 <body style="font-family: Mitr,sans-serif">
 
 
+
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="padding: 30px 0px 30px; background-color: #17a2b8!important">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
@@ -40,51 +41,34 @@
         </div>  
       </nav>
 
-	<div class="container" style="margin-top:30px;">
-		<form action="/add" method="GET" style="margin-bottom: 10px;">
-			<button type="submit" class="btn btn-danger">Add Project</button>
-
-		</form>
-		<div class="row">
-			<div class="card-deck">
-				<% data.forEach(function(data){
-					%> 
-					<div class="col-sm-4" style="margin-top: 10px;">
-						<div class="card">
-							<a href="<%= data.url %>"><img class="card-img-top" src="images/<%= data.img %>" alt="Card image cap"></a>
-							<div class="card-body" style="height: 100px;">
-								<h5 class="card-title"><%= data.name %></h5>
-								
-							</div>
-							<div class="card-footer">
-								
-								<small class="text-muted"><%= data.des %></small>
-								<br>
-								<br>
-								<a href="edit/<%= data._id %>" class="btn btn-primary" style="font-size:0.1rem;width: 60px;height: 30px;">Edit</a> <a href="del/<%= data._id%>" class="btn btn-primary" style="font-size:0.1rem;width: 60px;height: 30px; margin-left: 50%;">Delete</a>
-								  
-							</div>
-						</div>
-					</div>
-					
-					
-					<%
-				});  %>
-				
-				
-			</div>
-		</div>
+	<div class="container" style="margin-top:30px">
+		<form method="POST" action="/edit/<%= data._id%>" enctype="multipart/form-data" >
+            
+                <input name="name" type="text" class="form-control" placeholder="ชื่อ" value="<%=  data.name %>">
+                <br>
+                <hr>
+              
+				<input name="url" type="text" class="form-control" placeholder="ลิงค์" value="<%=  data.url %>">
+				<br>
+                <hr>
+                <textarea name="des" class="form-control"  value="<%=  data.des %>" id="exampleFormControlTextarea1" rows="3" placeholder="ลายละเอียด"></textarea>
+              
+              <br>
+                <hr>
+                <input name="img" type="file" class="form-control" placeholder="Zip" >
+              
+              <br>
+                <hr>
+              <input type="submit" >
+        
+          </form>
+		
 	</div>
 
 
 
 
 	<style type="text/css">
-	img {
-		height: 200px;
-		vertical-align: middle;
-    	border-style: none;
-	}
 	#nav {
 		font-size: 150%;
 	}

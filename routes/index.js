@@ -5,7 +5,11 @@ var user = require('../model/user');
 var multer =  require('multer');
 var data = require('../model/data');
 const bcrypt = require('bcrypt')
+const fs = require('fs')
 /* GET home page. */
+
+
+/*------------------------- รูปภาพ ---------------------------- */
 var _img = '';
 const storage = multer.diskStorage({
 	destination : (request, file, callback) => {
@@ -29,7 +33,7 @@ const isLoggedIn = (req, res, next) => {
   }
   next()
 }
-
+/*-------------------------       ---------------------------- */
 router.get('/',function(req, res, next) {
  
   res.render('index');
@@ -83,6 +87,12 @@ router.get('/logout',(req,res)=>{
   req.session.user = null;
   res.redirect('/');
 })
+
+
+
+
+
+/*------------------------- แสดงข้อมูล ---------------------------- */
 router.get('/project', async function(req, res, next) {
 
   _data = await data.find({});
@@ -98,6 +108,65 @@ router.get('/add',isLoggedIn,(req,res)=>{
 
 })
 
+
+
+router.get('/edit/:id',isLoggedIn,async (req,res)=>{
+  
+  _edit = await data.findById( req.params.id );
+
+  res.render('edit', {data: _edit});
+
+
+})
+router.post('/edit/:id',isLoggedIn,upload.any(),async(req,res)=>{
+  _img2 = await data.findById(req.params.id);
+
+  try {
+    
+    fs.unlinkSync(path.join(__dirname+'/../public/images/'+_img2.img))
+    
+    //file removed
+  } catch(err) {
+    console.log(err);
+    
+  }
+  await data.findByIdAndUpdate(req.params.id,{$set : {
+    name : req.body.name,
+    url : req.body.url,
+    des : req.body.des,
+    img: _img
+    }});
+    _img = ''
+  res.redirect('/project');
+
+  
+  
+
+});
+
+router.get('/del/:id',isLoggedIn,async (req,res)=>{
+  _img2 = await data.findById(req.params.id);
+
+  try {
+    
+    fs.unlinkSync(path.join(__dirname+'/../public/images/'+_img2.img))
+    
+    //file removed
+  } catch(err) {
+    console.log(err);
+    
+  }
+  _edit = await data.findByIdAndDelete(req.params.id);
+
+  res.redirect('/project');
+
+
+})
+
+
+
+
+
 router.post('/add', isLoggedIn,upload.any(),async(req,res)=>{
 
   input = new data({
@@ -106,8 +175,10 @@ router.post('/add', isLoggedIn,upload.any(),async(req,res)=>{
     des : req.body.des,
     img : _img
   }
+  
   );
   await input.save();
+  _img = '';
   res.redirect('/project')
 
 

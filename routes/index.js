@@ -120,11 +120,13 @@ router.get('/edit/:id',isLoggedIn,async (req,res)=>{
 })
 router.post('/edit/:id',isLoggedIn,upload.any(),async(req,res)=>{
   _img2 = await data.findById(req.params.id);
-
+  if(_img.length == 0){
+    _img = _img2.img;
+  }
   try {
-    
+    if(_img != _img2.img){
     fs.unlinkSync(path.join(__dirname+'/../public/images/'+_img2.img))
-    
+    }
     //file removed
   } catch(err) {
     console.log(err);
@@ -146,7 +148,7 @@ router.post('/edit/:id',isLoggedIn,upload.any(),async(req,res)=>{
 
 router.get('/del/:id',isLoggedIn,async (req,res)=>{
   _img2 = await data.findById(req.params.id);
-
+  
   try {
     
     fs.unlinkSync(path.join(__dirname+'/../public/images/'+_img2.img))
